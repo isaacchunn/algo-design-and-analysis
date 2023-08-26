@@ -1,2 +1,3 @@
 # sc2001
- Test codes and implementations of lecture slides and notes.
+Algorithm Design and Analysis
+- Test codes and implementations of lecture slides and notes.
