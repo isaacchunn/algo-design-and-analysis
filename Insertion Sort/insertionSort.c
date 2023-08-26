@@ -90,8 +90,7 @@ void main()
     insertionSortDescending(array, 6);
     print(array,6);
     */
-
-    //Malloc 
+   
     int array[3] = {45,29,6};
     int array2[3] = {45,29,6};
     //Initial print
