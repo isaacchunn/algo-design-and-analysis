@@ -33,7 +33,7 @@ int occurence = 1;
 
 int main (void)
 {
-    int array[SIZE] = {90,25,10,71,94,22,59,74};
+    int array[SIZE] = {23,23,23,23,23,23,23,23};
     print(array, SIZE);
     totalKeyComparisons = 0;
     mergeSort(array,0,SIZE-1,1);

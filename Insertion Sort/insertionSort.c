@@ -1,12 +1,13 @@
 #include <stdlib.h>
 #include <stdio.h>
-
 /*
 Insertion Sort
     Best Case: O(n)
     Worst Case: O(n^2)
     Average Case: O(n^2)
 */
+
+#define SIZE 6
 
 /// @brief Carries out insertion sort on a list in ascending order.
 /// @param arr dynamic array
@@ -16,10 +17,15 @@ void insertionSortAscending(int * arr, int n)
     printf("-Sorting list in ascending order with Insertion Sort-\n");
     int i,j,temp;
     int keyComparisons = 0;
+    int cumulativeKeyComparisons = 0;
+    print(arr, n);
     for(i = 1; i < n; i++)
     {
+        printf("%d\n",arr[i]);
+        cumulativeKeyComparisons  = 0;
         for(j = i; j > 0; j--)
         {               
+            cumulativeKeyComparisons++;
             keyComparisons++;
             //If condition check to see if the previous value is larger
             if(arr[j] < arr[j-1])
@@ -31,9 +37,11 @@ void insertionSortAscending(int * arr, int n)
             }
             else
                 break;
+  
         }
+        print(arr,n);
+        printf("[Occurence %d] Key Comparisons: [%d/%d]\n", i, cumulativeKeyComparisons, keyComparisons);
     }
-    printf("Key Comparisons: %d\n", keyComparisons);
 }
 
 /// @brief Carries out insertion sort on a list in descending order.
@@ -77,7 +85,7 @@ void print(int * arr, int n)
     printf("\n");
 }
 
-void main()
+int main()
 {
     /*
     int array[6] = {45,29,6,64,12,16};
@@ -91,16 +99,25 @@ void main()
     print(array,6);
     */
    
-    int array[3] = {45,29,6};
-    int array2[3] = {45,29,6};
+    int array[SIZE] = {45,29,6,64,12,16};
+    int array2[SIZE] = {45,29,6,64,12,16};
+    int array3[SIZE] = {5,5,5,5,5,5};
     //Initial print
-    print(array,3);
+    print(array,SIZE);
   //Initial print
-    print(array2,3);
+    print(array2,SIZE);
 
-    insertionSortAscending(array, 3);
-    print(array,3);
+    insertionSortAscending(array, SIZE);
+    print(array,SIZE);
 
-    insertionSortDescending(array2, 3);
-    print(array2,3);
+    insertionSortDescending(array2, SIZE);
+    print(array2,SIZE);
+
+    insertionSortAscending(array2, SIZE);
+    print(array2, SIZE);
+    
+    insertionSortAscending(array3, SIZE);
+    print(array3, SIZE);
+
+    return 0;
 }
