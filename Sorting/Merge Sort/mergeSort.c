@@ -10,9 +10,9 @@
 - Space efficient but slower time on this iterative approach
 
 //Time Complexity Analysis: (TODO: Try with Master's Theorem)
-// Best case (n/2)
-// Average case (?)
-// Worst Case (n-1)
+// Best case (nlogn)
+// Average case (nlogn) - Squeeze Theorem
+// Worst Case (nlogn)
 
 - Sample List
 -[9,3,7,5,6,4,8,2]
