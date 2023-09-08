@@ -76,34 +76,26 @@ void reverseKNodes(ListNode** head, int K){
     ListNode * firstNode = NULL;
     //Temporary flag to update the head once
     int updatedHead = 0;
-
+    //Size of linked list
+    int size = 0;
     //Handle the trivial cases where either head is 0 or K is < 0
     if(*head == NULL || K < 0)
         return;
-    
+
+    //Loop through once?
+    while(temp != NULL)
+    {
+        size++;
+        temp = temp->next;
+    }
     while(1)
     {
-        //If temp is null, means we have no remaining elements left to segment (a trivial case)
-        if(temp == NULL)
-            return;
-
-        //Else we do a pass of up to K first to check if there still exists >= k elements
-        //Include first index as we count the 1st element as part of the K
-        //Assuming ur list is 1,2,3
-        //Before first repetition: temp = 1 (temp must be 1 as on line 81, temp is head, and head cannot be null, which is why we can start at 1)
-        for(i = 1; i < K; i++)
+        //If remaining size is less than K
+        if(size < K)
         {
-            //Go to the next element of k
-            temp = temp->next;
-            //If we encounter a null, we have less than k nodes so we automatically return out of function
-            if(temp == NULL)
-            {
-                //If last node is head, that means the list has initially < k elements
-                //But if its not head, that means we have reversed other segments, and now we just link it back up to where the current pointer is at since we are not reversing
-                if(lastNode != *head)
-                    lastNode->next = curr;
-                return;
-            }
+            if(lastNode != *head)
+                lastNode->next = curr;
+            return;
         }
 
         //If in this repetition, there are still at >=k more elements left in the list to reverse, then we store our firstNode as our current
@@ -177,7 +169,9 @@ void reverseKNodes(ListNode** head, int K){
             //And of course, we set prev back to NULL to prevent any loops     
             prev = NULL;
         }  
+        size -=K;
     }
+    
 }
 
     //All in all, as a brief summary, what we do is we ensure to store the reference to the first node, e.g 1,2,3 - the firstNode is 1.
