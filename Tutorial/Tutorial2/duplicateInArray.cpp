@@ -7,6 +7,10 @@
 
 using namespace std;
 
+/*
+The other way if there is no hash map present, is to use a sorting algorithm such as merge sort (nlogn), and then iterative check one key to it's next adjacent key to see duplicates
+*/
+
 bool containsDuplicate(vector<int>& nums)
 {
     unordered_map<int, int> map;
