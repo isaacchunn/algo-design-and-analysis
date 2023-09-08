@@ -179,3 +179,4 @@ void reverseKNodes(ListNode** head, int K){
     //Also, since we initially set our firstNode's reference to point at 1, we can see that all we have to do is just use firstNode->next = the remaining parts of the list to join it back together.
     //Hence, the firstNode stores the "first element of" a segment k such that after the reversal, it is easy to use this node to link with other elements. This done in a slow and fast pointer way.
     //This method seems to be worse, as a recursive method could obviously return a better and cleaner result, but due to assignment limitations, all of it was done in one function. 
+    //This is a new comment
