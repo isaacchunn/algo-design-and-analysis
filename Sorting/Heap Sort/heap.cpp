@@ -67,7 +67,7 @@ void Heap::PrintHeap()
 	}
 	for (int i = 0; i < elements.size(); i++) {
 		for (int j = 0; j < pow(2, i) && j + pow(2, i) <= elements.size(); j++) {
-
+           
 			for (int k = 0; (k < max / ((int)pow(2, i))); k++) {
 				sb.append(" ");
 			}
@@ -93,8 +93,12 @@ bool Heap::ConstructHeap()
 		std::cout << "===Construct Heap===\n There are no elements to construct a heap!" << std::endl;
 		return false;
 	}
+    keyComparisons = 0;
 	//Else just call heapify
 	Heapify(0);
+    
+    //Print out the key comparisons
+    std::cout << "Key Comparisons: " << keyComparisons << endl;
 	return true;
 }
 
@@ -155,7 +159,8 @@ bool Heap::HeapSort(vector<int>& result)
 {
 	//This assumes that the array has already been heapified, and the sorting is just deletions and fixing the heap
 	//Check if current elements is empty
-	if (this->elements.size() == 0)
+    int size = (int)this->elements.size();
+	if (size == 0)
 	{
 		std::cout << "===Heap Sort===\n There are no elements to sort!" << std::endl;
 		return false;
@@ -166,9 +171,9 @@ bool Heap::HeapSort(vector<int>& result)
 	//Else populate result based on our heap sort
 	result.clear();
 	//Resize the result vector into n elements size
-	result.resize(elements.size());
+	result.resize(size);
 	//We already have anarray of n elements
-	for (int i = elements.size() - 1; i >= 0; i--)
+	for (int i = size - 1; i >= 0; i--)
 	{
 		//The first element of the heap is the largest
 		int currMax = elements[0];
@@ -188,7 +193,7 @@ void Heap::Heapify(int H)
 {
 	//This is 0 indexed
 	//Check if this is leaf
-	if (!isLeaf(H))
+	if (!isLeaf(H)) //
 	{
 		//Heapify both left and right subtrees
 		Heapify((H * 2) + 1);
@@ -223,7 +228,23 @@ void Heap::FixHeap(int H, int k)
 		//Accessing of elements is 0 index
 		int left = (H * 2) + 1;
 		int right = (H * 2) + 2;
-		int largerSubHeap = elements[left] > elements[right] ? left : right; // 1 comparison
+        
+        int largerSubHeap = 0;
+        //Error handle the right as current node might not have a right child
+        if(right >= this->elements.size())
+        {
+            keyComparisons++;
+            //There isnt a need to compare, as it is automatically the largest of the children
+            largerSubHeap = left;
+        }
+        else
+        {
+            //Then there are two children, and we must compare them both, adding 1 comparison
+            largerSubHeap = elements[left] > elements[right] ? left : right; // 1 comparison
+            keyComparisons++;
+        }
+        
+        keyComparisons++;
 		//Check k higher than larger element
 		if (k >= elements[largerSubHeap]) // another comparison so 2 comparisons per fix heap
 		{

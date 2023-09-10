@@ -27,6 +27,10 @@ class Heap
         int last_ptr;
         //Store then name of this heap for identification
         string heapName;
+        
+    
+        //Misc
+    int keyComparisons = 0;
 
     public:
         //Constructors, Destructors
