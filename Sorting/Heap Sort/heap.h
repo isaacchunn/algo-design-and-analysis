@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "date.h"
 
 using namespace std; 
 
@@ -15,11 +16,13 @@ enum HEAP_TYPE
     TOTAL_MODE
 };
 
+//Create a class template for
+template <class T>
 class Heap
 {
     private:
         //Have the heap store a vector of elements
-        std::vector<int> elements;
+        std::vector<T> elements;
         //Store the type of heap
         HEAP_TYPE heapType;
         //Store last pointer to present the "sorted result"
@@ -41,7 +44,7 @@ class Heap
         HEAP_TYPE GetHeapType();
         void SetName(string name);
         string GetName();
-        vector<int> GetElements();
+        vector<T> GetElements();
         
         //Print the heap
         void PrintElements();
@@ -49,20 +52,20 @@ class Heap
 
         //Typical methods of heap
         bool ConstructHeap();
-        bool SetElements(vector<int>& other);
+        bool SetElements(vector<T>& other);
         bool Insert(int element);
         void Delete();
         //*
-        bool HeapSort(vector<int>& result);
+        bool HeapSort(vector<T>& result);
 
     private:
         //Private methods that are exclusive to the heap
         void Heapify(int H);
-        void FixHeap(int H, int k);
+        void FixHeap(int H, T k);
         bool isLeaf(int H);
       
 };
 
-
+#include "heap_t.tpp"
 
 #endif
