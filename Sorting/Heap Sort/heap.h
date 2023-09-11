@@ -6,7 +6,6 @@
 #include <vector>
 #include <string>
 
-
 using namespace std; 
 
 enum HEAP_TYPE
@@ -27,10 +26,9 @@ class Heap
         int last_ptr;
         //Store then name of this heap for identification
         string heapName;
-        
     
         //Misc
-    int keyComparisons = 0;
+        int keyComparisons = 0;
 
     public:
         //Constructors, Destructors
@@ -41,6 +39,9 @@ class Heap
         //Accessors and Mutators
         void SetHeapType(HEAP_TYPE type);
         HEAP_TYPE GetHeapType();
+        void SetName(string name);
+        string GetName();
+        vector<int> GetElements();
         
         //Print the heap
         void PrintElements();
@@ -51,7 +52,7 @@ class Heap
         bool SetElements(vector<int>& other);
         bool Insert(int element);
         void Delete();
-        
+        //*
         bool HeapSort(vector<int>& result);
 
     private:

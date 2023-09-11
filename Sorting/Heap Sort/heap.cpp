@@ -31,6 +31,11 @@ HEAP_TYPE Heap::GetHeapType()
 	return this->heapType;
 }
 
+void Heap::SetName(string name)
+{
+    this->heapName = name;
+}
+
 /// <summary>
 /// Prints the elements in the heap
 /// </summary>
@@ -124,6 +129,7 @@ bool Heap::Insert(int element)
 {
 	//Insert at the back and then reconstruct heap
 	this->elements.push_back(element);
+    ConstructHeap();
 	return true;
 }
 
@@ -145,7 +151,10 @@ void Heap::Delete()
 	int k = elements.at(elements.size() - 1);
 	//Delete the rightmost element at the lowest level
 	//Stores the first element so the elements in the heap are also eventually sorted
-	elements[elements.size() - 1] = -1;
+    if(this->heapType == MAXIMISING)
+        elements[elements.size() - 1] = -1;
+    else
+        elements[elements.size() - 1] = INT_MAX;
 	//Then fix heap based on first index and k
 	FixHeap(0, k);
 }
@@ -240,17 +249,24 @@ void Heap::FixHeap(int H, int k)
         else
         {
             //Then there are two children, and we must compare them both, adding 1 comparison
-            largerSubHeap = elements[left] > elements[right] ? left : right; // 1 comparison
+            if(this->heapType == MAXIMISING)
+                largerSubHeap = elements[left] > elements[right] ? left : right; // 1 comparison
+            else
+                largerSubHeap = elements[left] > elements[right] ? right : left;
             keyComparisons++;
         }
         
         keyComparisons++;
 		//Check k higher than larger element
-		if (k >= elements[largerSubHeap]) // another comparison so 2 comparisons per fix heap
+		if (k >= elements[largerSubHeap] && this->heapType == MAXIMISING) // another comparison so 2 comparisons per fix heap
 		{
 			//Safely insert as k is larger than both left and rightchild of current root
 			elements[H] = k;
 		}
+        else if (k <= elements[largerSubHeap] && this->heapType == MINIMISING)
+        {
+            elements[H] = k;
+        }
 		else
 		{
 			//We msut insert root of the larger sub heap in root of H
