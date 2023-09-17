@@ -1,5 +1,5 @@
-#ifndef DJIKSTRA_H
-#define DJIKSTRA_H
+#ifndef DIJKSTRA_H
+#define DIJKSTRA_H
 
 #include "Graph.h"
 #include "Node.h"
