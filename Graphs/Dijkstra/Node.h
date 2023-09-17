@@ -16,6 +16,16 @@ struct Node
     int vertex;
     //Name of this node
     std::string name;
-}
+    //Distance to source
+    int dist;
+};
 
+//Custom comparator that compares nodes by distance
+struct CompareNode
+{
+    bool operator()(Node* const& n1, Node* const& n2)
+    {
+        return n1->dist > n2->dist;
+    }
+};
 #endif /* Node_h */

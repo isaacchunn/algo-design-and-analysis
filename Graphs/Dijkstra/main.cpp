@@ -2,6 +2,8 @@
 #include <iostream>
 #include "Graph.h"
 #include "Node.h"
+#include "ListNode.h"
+#include "Dijkstra.h"
 
 using namespace std;
 
@@ -52,25 +54,41 @@ int main()
     Node * s = new Node();
     s->name = "s";
     s->vertex = 0;
+    s->dist = 0;
     
     Node * u = new Node();
     u->name = "u";
-    u->vertex = 0;
+    u->vertex = 1;
+    u->dist = 0;
     
     Node * x = new Node();
     x->name = "x";
-    x->vertex = 0;
+    x->vertex = 2;
+    x->dist = 0;
     
     Node * v = new Node();
     v->name = "v";
-    v->vertex = 0;
+    v->vertex = 3;
+    v->dist = 0;
     
     Node * y = new Node();
-    y->name = "s";
-    y->vertex = 0;
+    y->name = "y";
+    y->vertex = 4;
+    y->dist = 0;
+    
+    //Add into our graph the above nodes, storing the vertex as keys (assumes no vertex are repeated)
+    graph->nodes[s->vertex] = s;
+    graph->nodes[u->vertex] = u;
+    graph->nodes[x->vertex] = x;
+    graph->nodes[v->vertex] = v;
+    graph->nodes[y->vertex] = y;
 
 	//Get input and update adj matrix
 	printGraphMatrix(graph);
+    
+
+    //Then try print
+    Dijkstra::FindShortestPath(graph, s,v);
 	
 	return 0;
 }
