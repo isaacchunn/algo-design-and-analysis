@@ -14,7 +14,7 @@ struct Graph
 	//Adjacency Matrix Implementation
 	vector<vector<int>> adjMatrix;
 	//Adjacency List Implementation
-	vector<ListNode*> adjList;
+	//vector<ListNode*> adjList;
 };
 
 #endif

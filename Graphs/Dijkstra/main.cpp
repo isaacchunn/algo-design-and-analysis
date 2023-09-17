@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <iostream>
 #include "Graph.h"
+#include "Node.h"
 
 using namespace std;
 
@@ -26,7 +27,7 @@ int main()
 	graph->V = vertexes;
 	//Resize our graph vectors
 	//Initialize our adj list first
-	graph->adjList.resize(graph->V);
+	//graph->adjList.resize(graph->V);
 	//for (int i = 0; i < graph->V; i++)
 	//{
 	//	//No head is initialized as we are using indexing to determine adjacency
@@ -46,13 +47,31 @@ int main()
     graph->adjMatrix[2] = {INT_MAX,3,0,9,2};
     graph->adjMatrix[3] = {INT_MAX,INT_MAX,INT_MAX,0,4};
     graph->adjMatrix[4] = {7,INT_MAX,INT_MAX,6,0};
+    
+    //Make many nodes for now to test (not the best implementation, just testing it out)
+    Node * s = new Node();
+    s->name = "s";
+    s->vertex = 0;
+    
+    Node * u = new Node();
+    u->name = "u";
+    u->vertex = 0;
+    
+    Node * x = new Node();
+    x->name = "x";
+    x->vertex = 0;
+    
+    Node * v = new Node();
+    v->name = "v";
+    v->vertex = 0;
+    
+    Node * y = new Node();
+    y->name = "s";
+    y->vertex = 0;
 
 	//Get input and update adj matrix
 	printGraphMatrix(graph);
 	
-	
-	
-
 	return 0;
 }
 
