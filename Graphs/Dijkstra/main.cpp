@@ -44,11 +44,18 @@ int main()
 	}
     
     //Code it for lecture graph
-    graph->adjMatrix[0] = {0,10,5,INT_MAX,INT_MAX};
-    graph->adjMatrix[1] = {INT_MAX,0,2,1,INT_MAX};
-    graph->adjMatrix[2] = {INT_MAX,3,0,9,2};
-    graph->adjMatrix[3] = {INT_MAX,INT_MAX,INT_MAX,0,4};
-    graph->adjMatrix[4] = {7,INT_MAX,INT_MAX,6,0};
+    //graph->adjMatrix[0] = {0,10,5,INT_MAX,INT_MAX};
+    //graph->adjMatrix[1] = {INT_MAX,0,2,1,INT_MAX};
+    //graph->adjMatrix[2] = {INT_MAX,3,0,9,2};
+    //graph->adjMatrix[3] = {INT_MAX,INT_MAX,INT_MAX,0,4};
+    //graph->adjMatrix[4] = {7,INT_MAX,INT_MAX,6,0};
+    
+    //Tutorial graph for it's adjacency matrix
+    graph->adjMatrix[0] = {0,4,2,6,8};
+    graph->adjMatrix[1] = {INT_MAX,0,INT_MAX,4,3};
+    graph->adjMatrix[2] = {INT_MAX,INT_MAX,0,1,INT_MAX};
+    graph->adjMatrix[3] = {INT_MAX,1,INT_MAX,0,3};
+    graph->adjMatrix[4] = {INT_MAX,INT_MAX,INT_MAX,INT_MAX,0};
     
     //Make many nodes for now to test (not the best implementation, just testing it out)
     Node * s = new Node();
@@ -86,8 +93,7 @@ int main()
 	//Get input and update adj matrix
 	printGraphMatrix(graph);
     
-
-    //Then try print
+    //Then try print the shortest path from the soruce node to end point
     Dijkstra::FindShortestPath(graph, s,v);
 	
 	return 0;
