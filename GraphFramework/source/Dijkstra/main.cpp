@@ -1,3 +1,6 @@
+#include "../Application.h"
+
+#ifdef DIJKSTRA
 #include <stdio.h>
 #include <iostream>
 #include "../Graph/Graph.h"
@@ -5,6 +8,8 @@
 #include "Dijkstra.h"
 #include "../Misc/Timer.h"
 #include <filesystem>
+
+
 
 #define M INT_MAX
 #define MAX_VERTICE 1000
@@ -468,6 +473,4 @@ int main()
 	} while (choice != 12);
 	return 0;
 }
-
-
-
+#endif
