@@ -1,7 +1,7 @@
 #ifndef PRIORITY_QUEUE_ARRAY_H
 #define PRIORITY_QUEUE_ARRAY_H
 
-#include "../Dijkstra/Node.h"
+#include "../Graph/Node.h"
 #include "../Heap/heap.h"
 
 #include <vector>

@@ -1,10 +1,9 @@
 #include <stdio.h>
 #include <iostream>
-#include "Dijkstra/Graph.h"
-#include "Dijkstra/Node.h"
-#include "Dijkstra/ListNode.h"
-#include "Dijkstra/Dijkstra.h"
-#include "Misc/Timer.h"
+#include "../Graph/Graph.h"
+#include "../Graph/Node.h"
+#include "Dijkstra.h"
+#include "../Misc/Timer.h"
 #include <filesystem>
 
 #define M INT_MAX
@@ -96,7 +95,7 @@ int main()
 			cout << "What name is the graph called?: ";
 			std::string fileName;
 			cin >> fileName;
-			string filePath = "data/" + fileName + ".csv";
+			string filePath = "data/Dijkstra/Graphs/" + fileName + ".csv";
 			if (graph->LoadGraph(filePath))
 				cout << "Graph sucessfully imported from " + filePath << endl;
 
@@ -107,7 +106,7 @@ int main()
 			cout << "What name is this graph called?: ";
 			std::string fileName;
 			cin >> fileName;
-			string filePath = "data/Graphs/" + fileName + ".csv";
+			string filePath = "data/Dijkstra/Graphs/" + fileName + ".csv";
 			if (graph->ExportGraph(filePath))
 				cout << "Graph successfully exported to " + filePath << endl;
 			break;
@@ -175,7 +174,7 @@ int main()
 			//Update graph mode
 			graph->type = (GRAPH_TYPE)graphMode;
 
-			string folderPath = "data/VaryingVFixedD/";
+			string folderPath = "data/Dijkstra/data/VaryingVFixedD/";
 			string folderName = "V_" + to_string(vertices) + "_D_" + to_string(density);
 			if (mode == HEAP)
 				folderName += "_Heap";
@@ -184,6 +183,8 @@ int main()
 			string filePath = folderPath + folderName + "/" + folderName + ".csv";
 
 			//Make directory
+			if (!std::filesystem::exists(folderPath))
+				std::filesystem::create_directory(folderPath);
 			if (!std::filesystem::exists(folderPath + folderName))
 				std::filesystem::create_directory(folderPath + folderName + "/");
 			if (!std::filesystem::exists(folderPath + folderName + "/Graph"))
@@ -252,7 +253,7 @@ int main()
 			//Update graph mode
 			graph->type = (GRAPH_TYPE)graphMode;
 
-			string folderPath = "data/VaryingDFixedV/";
+			string folderPath = "data/Dijkstra/data/VaryingDFixedV/";
 			string folderName = "V_" + to_string(vertices) + "_D_" + to_string(density);
 			if (mode == HEAP)
 				folderName += "_Heap";
@@ -262,6 +263,8 @@ int main()
 			string filePath = folderPath + folderName + "/" + folderName + ".csv";
 
 			//Make directory
+			if (!std::filesystem::exists(folderPath))
+				std::filesystem::create_directory(folderPath);
 			if (!std::filesystem::exists(folderPath + folderName))
 				std::filesystem::create_directory(folderPath + folderName + "/");
 			if (!std::filesystem::exists(folderPath + folderName + "/Graph"))
@@ -328,7 +331,7 @@ int main()
 			//Update graph mode
 			graph->type = (GRAPH_TYPE)graphMode;
 
-			string folderPath = "data/VaryingVVaryingD/";
+			string folderPath = "data/Dijkstra/data/VaryingVVaryingD/";
 			string folderName = "V_" + to_string(vertices) + "_D_" + to_string(vertices);
 			if (mode == HEAP)
 				folderName += "_Heap";
@@ -337,6 +340,8 @@ int main()
 			string filePath = folderPath + folderName + "/" + folderName + ".csv";
 
 			//Make directory
+			if (!std::filesystem::exists(folderPath))
+				std::filesystem::create_directory(folderPath);
 			if (!std::filesystem::exists(folderPath + folderName))
 				std::filesystem::create_directory(folderPath + folderName + "/");
 			if (!std::filesystem::exists(folderPath + folderName + "/Graph"))
@@ -403,7 +408,7 @@ int main()
 			//Update graph mode
 			graph->type = (GRAPH_TYPE)graphMode;
 
-			string folderPath = "data/FixedDFixedV/";
+			string folderPath = "data/Dijkstra/data/FixedDFixedV/";
 			string folderName = "V_" + to_string(vertices) + "_D_" + to_string(density);
 			if (mode == HEAP)
 				folderName += "_Heap";
@@ -412,6 +417,8 @@ int main()
 			string filePath = folderPath + folderName + "/" + folderName + ".csv";
 
 			//Make directory
+			if (!std::filesystem::exists(folderPath))
+				std::filesystem::create_directory(folderPath);
 			if (!std::filesystem::exists(folderPath + folderName))
 				std::filesystem::create_directory(folderPath + folderName + "/");
 

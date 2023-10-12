@@ -5,7 +5,7 @@
 
 //Wrapper class for our heap that contains many public functions
 #include "../Heap/heap.h"
-#include "../Dijkstra/Node.h"
+#include "../Graph/Node.h"
 
 class PriorityQueue
 {

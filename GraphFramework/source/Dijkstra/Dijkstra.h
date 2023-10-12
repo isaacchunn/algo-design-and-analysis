@@ -1,8 +1,8 @@
 #ifndef DIJKSTRA_H
 #define DIJKSTRA_H
 
-#include "Graph.h"
-#include "Node.h"
+#include "../Graph/Graph.h"
+#include "../Graph/Node.h"
 #include <iostream>
 #include "../PriorityQueue/PriorityQueue.h"
 #include "../PriorityQueue/PriorityQueueArray.h"

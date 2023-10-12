@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "../Dijkstra/Node.h"
+#include "../Graph/Node.h"
 
 using namespace std; 
 
