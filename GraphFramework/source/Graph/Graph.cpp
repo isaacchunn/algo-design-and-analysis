@@ -6,6 +6,17 @@ Graph::Graph()
 	:V(0), E(0), type(GRAPH_TYPE::DIRECTIONAL)
 {
 }
+//Copy everything
+Graph::Graph(Graph* g) :
+	V(g->V),
+	E(g->E),
+	type(g->type),
+	nodes(g->nodes),
+	adjMatrix(g->adjMatrix),
+	adjList(g->adjList)
+{
+
+}
 Graph::Graph(GRAPH_TYPE type)
 	:V(0), E(0), type(type)
 {
@@ -39,7 +50,7 @@ void Graph::SetNoOfVertices(int v)
 	//Then resize the adj matrix at each i and create a list node at each i
 	for (int i = 0; i < this->V; i++)
 	{
-		this->adjMatrix[i].resize(this->V);
+		this->adjMatrix[i] = std::vector<int>(this->V, INT_MAX);
 	}
 }
 
@@ -315,7 +326,7 @@ void Graph::GenerateRandomGraph(int numberOfNodes, int density)
 				int weight = (rand() % (this->V * 2)) + 1;
 				int randVertex = (rand() % vertexesLeft.size());
 				int actualVertex = vertexesLeft[randVertex];
-				
+
 				//Tries for this vertex
 				int tries = 0;
 				while (actualVertex == i || adjMatrix[i][actualVertex] != INT_MAX) //reject overriding weights to itself or adding same weights
@@ -396,12 +407,57 @@ void Graph::GenerateRandomGraph(int numberOfNodes, int density)
 
 }
 
+/// <summary>
+/// Adds a bidirectional edge between two vertices v1 and v2. Does not update the adjacency list.
+/// </summary>
+/// <param name="v1">vertice 1</param>
+/// <param name="v2">vertice 2</param>
+/// <param name="weight">weight</param>
+/// <param name="oneIndexed">whether we use one indexing</param>
+void Graph::AddBidirectionalEdge(int v1, int v2, int weight, bool oneIndexed)
+{
+	if (oneIndexed)
+	{
+		v1 -= 1;
+		v2 -= 1;
+	}
+	adjMatrix[v1][v2] = weight;
+	adjMatrix[v2][v1] = weight;
+}
+
+/// <summary>
+/// Copies the base variables from another graph, but not their adj matrix and adj list. this is for MST.
+/// </summary>
+/// <param name="g">graph</param>
+void Graph::SetupMST(Graph* g)
+{
+	this->V = g->V;
+	this->E = g->V;
+	this->type = g->type;
+	this->nodes = g->nodes;
+
+	//Resize our adjMatrix and adjList
+	adjMatrix.clear();
+	adjList.clear();
+
+	adjMatrix.resize(this->V);
+	for (int i = 0; i < this->V; i++)
+	{
+		adjMatrix[i] = vector<int>(this->V, INT_MAX);
+	}
+	adjList.resize(this->V);
+}
+
 
 /// <summary>
 /// Populates our adjacency list based on our adjacency matrix
 /// </summary>
 void Graph::UpdateAdjacencyList()
 {
+	//Redo our adj list each time to prevent any subscript out of ranges
+	adjList.clear();
+	adjList.resize(this->V);
+
 	//Loop through the adjMatrix
 	for (int i = 0; i < this->V; i++)
 	{

@@ -10,8 +10,6 @@
 #include <filesystem>
 
 
-
-#define M INT_MAX
 #define MAX_VERTICE 1000
 #define MAX_DENSITY 1000
 #define AVG_SAMPLES 10

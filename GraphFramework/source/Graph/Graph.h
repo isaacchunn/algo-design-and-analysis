@@ -20,6 +20,7 @@ class Graph
 {
 	public:
 		Graph();
+		Graph(Graph * g);
 		Graph(GRAPH_TYPE type);
 		~Graph();
 
@@ -28,9 +29,12 @@ class Graph
 		int E;
 		GRAPH_TYPE type;
 
+		//Vector of nodes
+		std::vector<Node*> nodes;
+
+		//Initial graph
 		vector<vector<int>> adjMatrix;
 		vector<ListNode*> adjList;
-		vector<Node*> nodes;
 		
 		//Functions
 		void SetNoOfVertices(int vertices);
@@ -45,6 +49,10 @@ class Graph
 		void PrintAdjList();
 		//Random function
 		void GenerateRandomGraph(int numberOfNodes, int density);
+		//New function to accomodate Prim's
+		void AddBidirectionalEdge(int v1, int v2, int weight, bool oneIndexed = true);
+		//Function to copy the necessary without the adjMatrix and adjList
+		void SetupMST(Graph* g);
 		
 };
 
