@@ -5,7 +5,7 @@ void DataHandler::WriteCSV(string fileName, vector<string> columnNames, vector<s
 {
 	ofstream myFile(fileName);
 	//Write column names
-	for (int i = 0; i < columnNames.size(); i++)
+	for (int i = 0; i < (int)columnNames.size(); i++)
 	{
 		myFile << columnNames[i];
 		if(i != columnNames.size()-1) 
@@ -13,7 +13,7 @@ void DataHandler::WriteCSV(string fileName, vector<string> columnNames, vector<s
 	}
 	myFile << "\n";
 	//Then just write each line of edge data
-	for (int i = 0; i < edgeData.size(); i++)
+	for (int i = 0; i < (int)edgeData.size(); i++)
 	{
 		myFile << edgeData[i] << "\n";
 	}

@@ -1,52 +1,53 @@
-#include "heap.h"
 #include <string>
 #include <iostream>
+#include <type_traits>
 
-//#define DEBUG
-
-int Heap::keyComparisons = 0;
-
-Heap::Heap()
+template<class T>
+Heap<T>::Heap()
 	: heapType(MAXIMISING),
 	last_ptr(0),
-	heapName("Default")
+	heapName("Default"),
+	keyComparisons(0)
 {
 
 }
 
-Heap::Heap(TYPE type, string name)
+template<class T>
+Heap<T>::Heap(TYPE type, string name)
 	: heapType(type),
 	last_ptr(0),
-	heapName(name)
+	heapName(name),
+	keyComparisons(0)
 {
 }
 
-Heap::~Heap()
+template<class T>
+Heap<T>::~Heap()
 {
 
 }
-
-void Heap::SetHeapType(TYPE type)
+template<class T>
+void Heap<T>::SetHeapType(TYPE type)
 {
 	this->heapType = type;
 }
-
-TYPE Heap::GetHeapType()
+template<class T>
+TYPE Heap<T>::GetHeapType()
 {
 	return this->heapType;
 }
-
-string Heap::GetName()
+template<class T>
+string Heap<T>::GetName()
 {
 	return this->heapName;
 }
-
-vector<Node*> Heap::GetElements()
+template<class T>
+vector<T> Heap<T>::GetElements()
 {
 	return this->elements;
 }
-
-void Heap::SetName(string name)
+template<class T>
+void Heap<T>::SetName(string name)
 {
 	this->heapName = name;
 }
@@ -54,7 +55,8 @@ void Heap::SetName(string name)
 /// <summary>
 /// Prints the elements in the heap
 /// </summary>
-void Heap::PrintElements()
+template<class T>
+void Heap<T>::PrintElements()
 {
 	if (elements.size() == 0)
 	{
@@ -63,7 +65,7 @@ void Heap::PrintElements()
 	}
 	//Else just print out normally
 	cout << "Heap Elements: [ ";
-	for (int i = 0; i < elements.size(); i++)
+	for (int i = 0; i < (int)elements.size(); i++)
 	{
 		cout << elements[i] << " ";
 	}
@@ -73,10 +75,12 @@ void Heap::PrintElements()
 /// <summary>
 /// https://stackoverflow.com/questions/36385868/java-how-to-print-heap-stored-as-array-level-by-level
 /// </summary>
-void Heap::PrintHeap()
+
+template<class T>
+void Heap<T>::PrintHeap()
 {
 	int max = 0;
-	for (int i = 0; i < elements.size(); i++) {
+	for (int i = 0; i < (int)elements.size(); i++) {
 		for (int j = 0; j < pow(2, i) && j + pow(2, i) <= elements.size(); j++) {
 
 			if (j > max) {
@@ -84,7 +88,7 @@ void Heap::PrintHeap()
 			}
 		}
 	}
-	for (int i = 0; i < elements.size(); i++) {
+	for (int i = 0; i < (int)elements.size(); i++) {
 		for (int j = 0; j < pow(2, i) && j + pow(2, i) <= elements.size(); j++) {
 
 			for (int k = 0; (k < max / ((int)pow(2, i))); k++) {
@@ -100,8 +104,8 @@ void Heap::PrintHeap()
 	}
 	cout << endl;
 }
-
-void Heap::PrintHeapArray()
+template<class T>
+void Heap<T>::PrintHeapArray()
 {
 	for (int i = 0; i < elements.size(); i++)
 	{
@@ -114,7 +118,8 @@ void Heap::PrintHeapArray()
 /// Constructs the heap based on the elements in the heap
 /// </summary>
 /// <returns>True if heap was constrtucted, false if elements in heap is 0</returns>
-bool Heap::ConstructHeap()
+template<class T>
+bool Heap<T>::ConstructHeap()
 {
 	//Check if the size of vector isnt 0, or has already constructed
 	if (elements.size() == 0)
@@ -141,7 +146,8 @@ bool Heap::ConstructHeap()
 /// </summary>
 /// <param name="other">other vector</param>
 /// <returns>True by default.</returns>
-bool Heap::SetElements(vector<Node*>& other)
+template<class T>
+bool Heap<T>::SetElements(vector<T>& other)
 {
 	//Clear the current vector first
 	elements.clear();
@@ -157,7 +163,8 @@ bool Heap::SetElements(vector<Node*>& other)
 /// </summary>
 /// <param name="element">new element</param>
 /// <returns>True by default.</returns>
-bool Heap::Insert(Node* element)
+template<class T>
+bool Heap<T>::Insert(T element)
 {
 	/*
 	if (std::find(elements.begin(), elements.end(), element) != elements.end())
@@ -180,7 +187,7 @@ bool Heap::Insert(Node* element)
 			keyComparisons++;
 			
 			//Swap between both parent and current idx
-			Node* n = elements[idx];
+			T n = elements[idx];
 			elements[idx] = elements[(idx - 1) / 2];
 			elements[(idx - 1) / 2] = n;
 			
@@ -196,7 +203,7 @@ bool Heap::Insert(Node* element)
 			//While there is a parent, and the parent has a smaller value than our element at idx
 			keyComparisons++;
 
-			Node* n = elements[idx];
+			T n = elements[idx];
 			elements[idx] = elements[(idx - 1) / 2];
 			elements[(idx - 1) / 2] = n;
 
@@ -208,9 +215,10 @@ bool Heap::Insert(Node* element)
 }
 
 /// <summary>
-/// Deletes the max node of an already constructed heap and reconstructs the heap by FixHeap()
+/// Deletes the top element of the heap
 /// </summary>
-void Heap::Delete()
+template<class T>
+void Heap<T>::Delete()
 {
 	//Return if nothing to Delete
 	if (this->elements.size() == 0)
@@ -222,7 +230,7 @@ void Heap::Delete()
 	}
 
 	//Store the last element of heap into temp variable and decrement last ptr
-	Node* k = elements[last_ptr--];
+	T k = elements[last_ptr--];
 	//Then fix heap based on first index and k up to the last ptr index
 	FixHeap(0, k, last_ptr);
 	//Then remove last index variable in heap
@@ -234,7 +242,8 @@ void Heap::Delete()
 /// </summary>
 /// <typeparam name="T"></typeparam>
 /// <param name="element">element to delete</param>
-void Heap::Delete(Node* element)
+template<class T>
+void Heap<T>::Delete(T element)
 {
 	//Return if nothing to Delete
 	if (this->elements.size() == 0)
@@ -245,12 +254,12 @@ void Heap::Delete(Node* element)
 		return;
 	}
 	int i;
-	for (i = 0; i < elements.size(); i++)
+	for (i = 0; i < (int)elements.size(); i++)
 	{
 		if (elements[i] == element)
 		{
 			//We found it, swap last value with this value
-			Node* k = elements[last_ptr--];
+			T k = elements[last_ptr--];
 			//Then fix heap based on this index and k up to the last ptr index
 			FixHeap(i, k, last_ptr);
 			//Remove last element
@@ -266,7 +275,8 @@ void Heap::Delete(Node* element)
 /// </summary>
 /// <param name="result">result vector</param>
 /// <returns>True if sorting was done, false if there are no elements to sort</returns>
-bool Heap::HeapSort(vector<Node*>& result)
+template<class T>
+bool Heap<T>::HeapSort(vector<T>& result)
 {
 	//This assumes that the array has already been heapified, and the sorting is just deletions and fixing the heap
 	//Check if current elements is empty
@@ -289,7 +299,7 @@ bool Heap::HeapSort(vector<Node*>& result)
 	for (int i = last_ptr; i >= 0; i--)
 	{
 		//The first element of the heap is the largest
-		Node* currMax = elements[0];
+		T currMax = elements[0];
 		//Call the delete function
 		Delete();
 		//Then assign this curr max to the end of our array (should return something here later on)
@@ -303,7 +313,8 @@ bool Heap::HeapSort(vector<Node*>& result)
 /// Recursive function that heapifys the heap to ensure partial order of heap is maintained
 /// </summary>
 /// <param name="H">index of root (usually 0)</param>
-void Heap::Heapify(int H)
+template<class T>
+void Heap<T>::Heapify(int H)
 {
 	//This is 0 indexed
 	//Check if this is leaf
@@ -314,7 +325,7 @@ void Heap::Heapify(int H)
 		Heapify((H * 2) + 2);
 		//Then set k as the element at this index
 		//PrintHeap();
-		Node* k = elements[H];
+		T k = elements[H];
 		FixHeap(H, k, last_ptr);
 	}
 }
@@ -324,8 +335,11 @@ void Heap::Heapify(int H)
 /// </summary>
 /// <param name="H">index of root</param>
 /// <param name="k">value to compare</param>
-void Heap::FixHeap(int H, Node* k, int maxIndex)
-{
+template<class T>
+template <typename U = T>
+typename std::enable_if<!std::is_pointer<U>::value>::type Heap<T>::FixHeap(int H, T k, int maxIndex)
+{	
+	cout << "Running heap normal version" << endl;
 	//Error handling for when H is out of range
 	if (H < 0 || H > maxIndex)
 		return;
@@ -357,21 +371,21 @@ void Heap::FixHeap(int H, Node* k, int maxIndex)
 		{
 			//Then there are two children, and we must compare them both.
 			if (this->heapType == MAXIMISING)
-				largerSubHeap = *elements[left] > *elements[right] ? left : right;
+				largerSubHeap = elements[left] > elements[right] ? left : right;
 			else
-				largerSubHeap = *elements[left] > *elements[right] ? right : left;
+				largerSubHeap = elements[left] > elements[right] ? right : left;
 
 			//Increment the keycomparisons for comparing a child
 			keyComparisons++;
 		}
 		//Check k higher than larger element
-		if (*k >= *elements[largerSubHeap] && this->heapType == MAXIMISING) // another comparison so 2 comparisons per fix heap
+		if (k >= elements[largerSubHeap] && this->heapType == MAXIMISING) // another comparison so 2 comparisons per fix heap
 		{
 			keyComparisons++;
 			//Safely insert as k is larger than both left and rightchild of current root
 			elements[H] = k;
 		}
-		else if (*k <= *elements[largerSubHeap] && this->heapType == MINIMISING)
+		else if (k <= elements[largerSubHeap] && this->heapType == MINIMISING)
 		{
 			keyComparisons++;
 			elements[H] = k;
@@ -385,13 +399,89 @@ void Heap::FixHeap(int H, Node* k, int maxIndex)
 	}
 }
 
+
+/// <summary>
+/// Fixes the heap by comparing root and descendants
+/// </summary>
+/// <param name="H">index of root</param>
+/// <param name="k">value to compare</param>
+template<class T>
+template <typename U = T>
+typename std::enable_if<std::is_pointer<U>::value>::type Heap<T>::FixHeap(int H, T k, int maxIndex)
+{
+	cout << "Running heap pointer version" << endl;
+	//Error handling for when H is out of range
+	if (H < 0 || H > maxIndex)
+		return;
+
+	//Using 0 indexed list
+	//Check if parent head is a leaf node
+	if (isLeaf(H))
+	{
+		//Insert k at index H
+		elements[H] = k;
+	}
+	else
+	{
+		//Accessing of elements is 0 index
+		int left = (H * 2) + 1;
+		int right = (H * 2) + 2;
+
+		//Index of the larger sub heap
+		int largerSubHeap = 0;
+		//Error handle the right as current node might not have a right child
+		//Check if the left and right falls beneath maxIndex;
+		if (left == maxIndex)
+		{
+			//If left is equals to maxIndex, means right is already out of the picture, so left subheap is automatically bigger, and no need to compare with the right
+			//In tutorial, no key comparison was added here.
+			largerSubHeap = left;
+		}
+		else if (right <= maxIndex) //right must be less than or equals to max index
+		{
+			T leftElement = elements[left];
+			T rightElement = elements[right];
+			//Then there are two children, and we must compare them both.
+			if (this->heapType == MAXIMISING)
+				largerSubHeap = *leftElement > *rightElement ? left : right;
+			else
+				largerSubHeap = *leftElement > *rightElement ? right : left;
+
+			//Increment the keycomparisons for comparing a child
+			keyComparisons++;
+		}
+
+		T kVal = k;
+		T larger = elements[largerSubHeap];
+
+		//Check k higher than larger element
+		if (*kVal >= *larger && this->heapType == MAXIMISING) // another comparison so 2 comparisons per fix heap
+		{
+			keyComparisons++;
+			//Safely insert as k is larger than both left and rightchild of current root
+			elements[H] = k;
+		}
+		else if (*kVal <= *larger && this->heapType == MINIMISING)
+		{
+			keyComparisons++;
+			elements[H] = k;
+		}
+		else
+		{
+			//We must insert root of the larger sub heap in root of H
+			elements[H] = elements[largerSubHeap];
+			FixHeap(largerSubHeap, k, maxIndex);
+		}
+	}	
+}
+
 /// <summary>
 /// Returns true if the nodes is a leaf node
 /// </summary>
 /// <param name="H">0-indexed index of the node</param>
 /// <returns>None</returns>
-bool Heap::isLeaf(int H)
+template<class T>
+bool Heap<T>::isLeaf(int H)
 {
 	return (H * 2) + 1 > last_ptr;
 }
-

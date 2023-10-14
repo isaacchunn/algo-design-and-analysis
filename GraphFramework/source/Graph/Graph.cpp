@@ -94,7 +94,7 @@ bool Graph::LoadGraph(std::string file)
 
 	//Then resize our vectors accordingly
 	adjMatrix.resize(this->V);
-	for (int i = 0; i < adjMatrix.size(); i++)
+	for (int i = 0; i < (int)adjMatrix.size(); i++)
 	{
 		adjMatrix[i] = vector<int>(this->V, INT_MAX);
 	}
@@ -367,7 +367,7 @@ void Graph::GenerateRandomGraph(int numberOfNodes, int density)
 				{
 					int z;
 					//Remove this the index in the vertexesLeft
-					for (z = 0; z < vertexesLeft.size(); z++)
+					for (z = 0; z < (int)vertexesLeft.size(); z++)
 					{
 						if (vertexesLeft[z] == i)
 							break;
@@ -387,7 +387,7 @@ void Graph::GenerateRandomGraph(int numberOfNodes, int density)
 						//Check if edges is there, and remove it from the vertexesleft
 						int z;
 						//Remove this the index in the vertexesLeft
-						for (z = 0; z < vertexesLeft.size(); z++)
+						for (z = 0; z < (int)vertexesLeft.size(); z++)
 						{
 							if (vertexesLeft[z] == actualVertex)
 								break;

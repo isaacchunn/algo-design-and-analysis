@@ -5,7 +5,7 @@
 #include <vector>
 #include <string>
 #include "../Graph/Node.h"
-
+#include <type_traits>
 using namespace std; 
 
 enum TYPE
@@ -16,13 +16,16 @@ enum TYPE
 };
 
 /// <summary>
-/// Non templated heap update 10/6/2023 as templated heap was causing different results on compilation
+/// Only works with pointer variables now that is sufficient for the graph implementations
 /// </summary>
+/// <typeparam name="T"></typeparam>
+
+template<class T>
 class Heap
 {
     private:
         //Have the heap store a vector of elements
-        std::vector<Node*> elements;
+        std::vector<T> elements;
         //Store the type of heap
         TYPE heapType;
         //Store last pointer to present the "sorted result"
@@ -30,7 +33,7 @@ class Heap
         //Store the name of this heap for identification
         string heapName;
         //Misc
-        static int keyComparisons;
+        int keyComparisons;
 
     public:
         //Constructors, Destructors
@@ -43,7 +46,7 @@ class Heap
         void SetName(string name);
         TYPE GetHeapType();
         string GetName();
-        vector<Node*> GetElements();
+        vector<T> GetElements();
         
         //Print the heap
         void PrintElements();
@@ -52,17 +55,22 @@ class Heap
 
         //Typical methods of heap
         bool ConstructHeap();
-        bool SetElements(vector<Node*>& other);
-        bool Insert(Node* element);
+        bool SetElements(vector<T>& other);
+        bool Insert(T element);
         void Delete();
-        void Delete(Node* element);
+        void Delete(T element);
         //*
-        bool HeapSort(vector<Node*>& result);
+        bool HeapSort(vector<T>& result);
 
     private:
         //Private methods that are exclusive to the heap
         void Heapify(int H);
-        void FixHeap(int H, Node* k, int maxIndex);
+        template <typename U = T>
+        typename std::enable_if<std::is_pointer<U>::value>::type FixHeap(int H, T k, int maxIndex);  
+        template <typename U = T>
+        typename std::enable_if<!std::is_pointer<U>::value>::type FixHeap(int H, T k, int maxIndex);
         bool isLeaf(int H);
 };
+//template file inclusion
+#include "Heap.tpp"
 #endif

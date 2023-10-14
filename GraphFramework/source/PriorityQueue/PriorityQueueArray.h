@@ -2,7 +2,7 @@
 #define PRIORITY_QUEUE_ARRAY_H
 
 #include "../Graph/Node.h"
-#include "../Heap/heap.h"
+#include "../Heap/Heap.h"
 
 #include <vector>
 #include <set>
