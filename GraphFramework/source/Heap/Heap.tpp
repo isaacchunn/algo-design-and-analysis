@@ -339,7 +339,7 @@ template<class T>
 template <typename U = T>
 typename std::enable_if<!std::is_pointer<U>::value>::type Heap<T>::FixHeap(int H, T k, int maxIndex)
 {	
-	cout << "Running heap normal version" << endl;
+	//cout << "Running heap normal version" << endl;
 	//Error handling for when H is out of range
 	if (H < 0 || H > maxIndex)
 		return;
@@ -409,7 +409,7 @@ template<class T>
 template <typename U = T>
 typename std::enable_if<std::is_pointer<U>::value>::type Heap<T>::FixHeap(int H, T k, int maxIndex)
 {
-	cout << "Running heap pointer version" << endl;
+	//cout << "Running heap pointer version" << endl;
 	//Error handling for when H is out of range
 	if (H < 0 || H > maxIndex)
 		return;

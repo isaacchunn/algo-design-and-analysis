@@ -15,7 +15,7 @@ class Prim {
 		static std::vector<int> S; //vector to realize whether a vertex is part of the spanning tree being built
 
 		//private function to update fringe
-		static void UpdateFringe(Graph* g, PriorityQueue* pq, Node* u);
+		static void UpdateFringe(Graph* g, PriorityQueue<Node*>* pq, Node* u);
 		static void UpdateMST(Graph* mst);
 	public:
 		//Functions to build our MST

@@ -1,17 +1,18 @@
-#include "PriorityQueue.h"
+//#include "PriorityQueue.h"
 
-PriorityQueue::PriorityQueue()
+template<class T>
+PriorityQueue<T>::PriorityQueue()
 {
 	heap.SetHeapType(MAXIMISING);
 }
-
-PriorityQueue::PriorityQueue(TYPE heapType)
+template<class T>
+PriorityQueue<T>::PriorityQueue(TYPE heapType)
 {
 	//Set our heap type
 	heap.SetHeapType(heapType);
 }
-
-PriorityQueue::~PriorityQueue()
+template<class T>
+PriorityQueue<T>::~PriorityQueue()
 {
 }
 
@@ -19,14 +20,11 @@ PriorityQueue::~PriorityQueue()
 /// Inserts a node into the heap
 /// </summary>
 /// <param name="n"></param>
-bool PriorityQueue::Insert(Node* n)
+template<class T>
+bool PriorityQueue<T>::Insert(T n)
 {
 	if (n == NULL)
 		return false;
-
-#ifdef DEBUG
-    cout << "Inserting vertex " << n->GetName() << " into the queue." << endl;
-#endif
 
 	heap.Insert(n);
 	return true;
@@ -36,11 +34,11 @@ bool PriorityQueue::Insert(Node* n)
 /// Removes a specific node from the heap
 /// </summary>
 /// <param name="n"></param>
-bool PriorityQueue::Delete(Node* n)
+template<class T>
+bool PriorityQueue<T>::Delete(T n)
 {
 	if (n == NULL)
 		return false;
-	//We have to reconstruct a heap each time we do this as it does not guarantee the completeness of the tree
 	heap.Delete(n);
 	return true;
 }
@@ -49,7 +47,8 @@ bool PriorityQueue::Delete(Node* n)
 /// Gets the top node of the priority queue and removes that element from the queue
 /// </summary>
 /// <returns></returns>
-Node* PriorityQueue::Top()
+template<class T>
+T PriorityQueue<T>::Top()
 {
 //	//If the heap is empty
 //	if (IsEmpty())
@@ -61,7 +60,7 @@ Node* PriorityQueue::Top()
 //	}
 	
 	//Else we can get the heap's first index and call delete
-	Node* n = heap.GetElements()[0];
+	T n = heap.GetElements()[0];
 	heap.Delete();
 
 	return n;
@@ -70,7 +69,8 @@ Node* PriorityQueue::Top()
 /// <summary>
 /// Function to print the queue=
 /// </summary>
-void PriorityQueue::PrintQueue()
+template<class T>
+void PriorityQueue<T>::PrintQueue()
 {
 	heap.PrintHeap();
 	cout << endl;
@@ -81,7 +81,8 @@ void PriorityQueue::PrintQueue()
 /// Checks if the queue is empty
 /// </summary>
 /// <returns></returns>
-bool PriorityQueue::IsEmpty()
+template<class T>
+bool PriorityQueue<T>::IsEmpty()
 {
 	//return heap size is 0
 	return heap.GetElements().empty();

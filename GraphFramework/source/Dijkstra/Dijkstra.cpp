@@ -22,7 +22,7 @@ void Dijkstra::CalculateShortestPathHeap(Graph* g, Node* source)
 
 	//Initialize new priority queue
 	//Priority queue in terms of int distances, we will utilise the map
-	PriorityQueue pq = PriorityQueue(TYPE::MINIMISING);
+	PriorityQueue<Node*> pq = PriorityQueue<Node*>(TYPE::MINIMISING);
 
 	//For each vertice in graph (assumed to be in ascending order)
 	for (int v = 0; v < g->V; v++)

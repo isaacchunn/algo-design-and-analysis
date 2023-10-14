@@ -10,7 +10,7 @@ void Prim::BuildMST(Graph* g, Graph* mst, Node* source)
 	if (g == NULL || source == NULL)
 		return;
 	//Initialize our priority queue that is minimising
-	PriorityQueue* pq = new PriorityQueue(MINIMISING);
+	PriorityQueue<Node*> * pq = new PriorityQueue<Node*>(MINIMISING);
 
 	//Clear our vectors
 	pi.clear();
@@ -70,7 +70,7 @@ void Prim::BuildMST(Graph* g, Graph* mst, int sourceVertex)
 	}
 }
 
-void Prim::UpdateFringe(Graph* g, PriorityQueue* pq, Node* u)
+void Prim::UpdateFringe(Graph* g, PriorityQueue<Node*>* pq, Node* u)
 {
 	//Trivial case checking
 	if (g == NULL || pq == NULL || u == NULL)
