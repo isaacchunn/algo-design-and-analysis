@@ -1,11 +1,11 @@
 #include "PriorityQueueArray.h"
 
 PriorityQueueArray::PriorityQueueArray()
-	: type(TYPE::MINIMISING), size(0)
+	: type(HEAP_TYPE::MINIMISING), size(0)
 {
 }
 
-PriorityQueueArray::PriorityQueueArray(TYPE type)
+PriorityQueueArray::PriorityQueueArray(HEAP_TYPE type)
 	: type(type) ,size(0)
 {
 }

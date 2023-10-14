@@ -6,7 +6,7 @@ PriorityQueue<T>::PriorityQueue()
 	heap.SetHeapType(MAXIMISING);
 }
 template<class T>
-PriorityQueue<T>::PriorityQueue(TYPE heapType)
+PriorityQueue<T>::PriorityQueue(HEAP_TYPE heapType)
 {
 	//Set our heap type
 	heap.SetHeapType(heapType);

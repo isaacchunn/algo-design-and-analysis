@@ -8,7 +8,7 @@
 #include <type_traits>
 using namespace std; 
 
-enum TYPE
+enum HEAP_TYPE
 {
     MAXIMISING,
     MINIMISING,
@@ -27,7 +27,7 @@ class Heap
         //Have the heap store a vector of elements
         std::vector<T> elements;
         //Store the type of heap
-        TYPE heapType;
+        HEAP_TYPE heapType;
         //Store last pointer to present the "sorted result"
         int last_ptr;
         //Store the name of this heap for identification
@@ -38,13 +38,13 @@ class Heap
     public:
         //Constructors, Destructors
         Heap();
-        Heap(TYPE type, string name);
+        Heap(HEAP_TYPE type, string name);
         ~Heap();
         
         //Accessors and Mutators
-        void SetHeapType(TYPE type);
+        void SetHeapType(HEAP_TYPE type);
         void SetName(string name);
-        TYPE GetHeapType();
+        HEAP_TYPE GetHeapType();
         string GetName();
         vector<T> GetElements();
         

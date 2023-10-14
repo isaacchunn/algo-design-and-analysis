@@ -129,6 +129,7 @@ void Prim::UpdateMST(Graph* mst)
 		int parentVertex = parent->GetVertex();
 		//Update bidirectional edge in mst
 		mst->AddBidirectionalEdge(i, parentVertex, mst->nodes[i]->GetDistanceFromSource(), false);
+		mst->E++;
 	}
 	mst->UpdateAdjacencyList();
 }

@@ -5,6 +5,7 @@
 #include <vector>
 #include <time.h>
 #include "ListNode.h"
+#include "Edge.h"
 #include "../Misc/DataHandler.h"
 
 using namespace std;
@@ -35,6 +36,9 @@ class Graph
 		//Initial graph
 		vector<vector<int>> adjMatrix;
 		vector<ListNode*> adjList;
+
+		//Store a list of edges for Kruskal's algorithms
+		vector<Edge*> edges;
 		
 		//Functions
 		void SetNoOfVertices(int vertices);
@@ -53,6 +57,7 @@ class Graph
 		void AddBidirectionalEdge(int v1, int v2, int weight, bool oneIndexed = true);
 		//Function to copy the necessary without the adjMatrix and adjList
 		void SetupMST(Graph* g);
+		void PopulateEdges();
 		
 };
 

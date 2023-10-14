@@ -43,7 +43,45 @@ int main()
 		}
 		//lecture graph
 		case 2:
-		{
+		{		
+			//Set the number of vertices to be 5
+			graph->SetNoOfVertices(14);
+
+			//Manually add the edges
+			graph->AddBidirectionalEdge(1, 2, 8);
+			graph->AddBidirectionalEdge(1, 3, 4);
+			graph->AddBidirectionalEdge(1, 4, 2);
+			graph->AddBidirectionalEdge(2, 5, 9);
+			graph->AddBidirectionalEdge(2, 13, 5);
+			graph->AddBidirectionalEdge(3, 6, 9);
+			graph->AddBidirectionalEdge(4, 5, 8);
+			graph->AddBidirectionalEdge(4, 8, 1);
+			graph->AddBidirectionalEdge(5, 7, 2);
+			graph->AddBidirectionalEdge(6, 8, 2);
+			graph->AddBidirectionalEdge(6, 9, 5);
+			graph->AddBidirectionalEdge(6, 11, 5);
+			graph->AddBidirectionalEdge(7, 8, 8);
+			graph->AddBidirectionalEdge(7, 10, 7);
+			graph->AddBidirectionalEdge(8, 9, 2);
+			graph->AddBidirectionalEdge(8, 12, 9);
+			graph->AddBidirectionalEdge(9, 10, 5);
+			graph->AddBidirectionalEdge(9, 12, 9);
+			graph->AddBidirectionalEdge(10, 14, 5);
+
+			//Populate our nodes
+			for (int i = 0; i < graph->V; i++)
+			{
+				Node* n = new Node(i, INT_MAX, to_string(i + 1));
+				graph->nodes[i] = n;
+			}
+
+			//Update adjacency list
+			graph->UpdateAdjacencyList();
+			graph->PopulateEdges();
+			//Get input and update adj matrix
+			graph->PrintAdjMatrix();
+			graph->PrintAdjList();
+			break;
 			break;
 		}
 		case 3:
@@ -95,6 +133,7 @@ int main()
 		{
 			mst->PrintAdjMatrix();
 			mst->PrintAdjList();
+			break;
 		}
 		case 8:
 		{

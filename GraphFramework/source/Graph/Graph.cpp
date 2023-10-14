@@ -36,6 +36,7 @@ void Graph::SetNoOfVertices(int v)
 	//Clear all the previous entries if there exists
 	this->adjMatrix.clear();
 	this->adjList.clear();
+	this->edges.clear();
 
 	this->V = v;
 	//Then resize our adjacency matrix and lists
@@ -63,6 +64,7 @@ void Graph::Clear()
 	adjMatrix.clear();
 	adjList.clear();
 	nodes.clear();
+	edges.clear();
 
 	//Reset vertices and edges
 	this->V = 0;
@@ -130,7 +132,7 @@ bool Graph::LoadGraph(std::string file)
 
 	//Once populated, update our adj list
 	UpdateAdjacencyList();
-
+	PopulateEdges();
 	//Then print our matrix and list
 	PrintAdjMatrix();
 	PrintAdjList();
@@ -404,7 +406,7 @@ void Graph::GenerateRandomGraph(int numberOfNodes, int density)
 	//cout << "Graph finished generating." << endl;
 	//After this is done, calculate our adj list
 	UpdateAdjacencyList();
-
+	PopulateEdges();
 }
 
 /// <summary>
@@ -432,7 +434,8 @@ void Graph::AddBidirectionalEdge(int v1, int v2, int weight, bool oneIndexed)
 void Graph::SetupMST(Graph* g)
 {
 	this->V = g->V;
-	this->E = g->V;
+	//Set edges to be 0 as the edges are a subset of the real graph that will be incremented by the MST builder
+	this->E = 0;
 	this->type = g->type;
 	this->nodes = g->nodes;
 
@@ -446,6 +449,38 @@ void Graph::SetupMST(Graph* g)
 		adjMatrix[i] = vector<int>(this->V, INT_MAX);
 	}
 	adjList.resize(this->V);
+}
+
+/// <summary>
+/// Reads the adj list and populates our edges array
+/// </summary>
+void Graph::PopulateEdges()
+{
+	//Clear edges~
+	edges.clear();
+	for (int i = 0; i < this->V; i++)
+	{
+		//Check if adjList at this node is null
+		if (adjList[i] == NULL)
+			continue;
+		ListNode* curr = adjList[i];
+		while (curr != NULL)
+		{
+			Node* adjNode = curr->node;
+			int v = adjNode->GetVertex();
+			//We can also skip if curr vertex is less than i
+			if (v > i)
+			{
+				//Then use our adj matrix for O(1) access of weights
+				int cost = adjMatrix[i][v];
+				//Make a new edge if mp does not contain i * v
+				Edge* edge = new Edge(nodes[i], adjNode, cost);
+				//Add to vector
+				edges.push_back(edge);
+			}
+			curr = curr->next;
+		}
+	}
 }
 
 

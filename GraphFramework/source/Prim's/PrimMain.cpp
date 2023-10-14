@@ -159,6 +159,7 @@ int main()
 		{
 			mst->PrintAdjMatrix();
 			mst->PrintAdjList();
+			break;
 		}
 		case 8:
 		{
@@ -168,6 +169,7 @@ int main()
 			Prim::BuildMST(graph, mst, 0);
 			mst->PrintAdjMatrix();
 			mst->PrintAdjList();
+			cout << "Edges: " << mst->E << endl;
 			break;
 		}
 		case 9:

@@ -5,6 +5,7 @@
 #include "../Graph/Node.h"
 #include "../PriorityQueue/PriorityQueue.h"
 #include "../Graph/Graph.h"
+#include "../UnionFind/QuickFind.h"
 
 class Kruskal
 {

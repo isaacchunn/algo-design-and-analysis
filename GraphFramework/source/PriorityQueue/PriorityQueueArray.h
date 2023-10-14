@@ -14,11 +14,11 @@ class PriorityQueueArray
 {
 	private:
 		std::vector<Node*> elements;
-		TYPE type;
+		HEAP_TYPE type;
 		int size;
 	public:
 		PriorityQueueArray();
-		PriorityQueueArray(TYPE type);
+		PriorityQueueArray(HEAP_TYPE type);
 
 		//Typical queue functions
 		bool Insert(Node* n);

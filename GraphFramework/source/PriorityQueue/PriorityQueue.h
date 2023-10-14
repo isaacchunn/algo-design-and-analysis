@@ -16,7 +16,7 @@ class PriorityQueue
 		Heap<T> heap;
 	public:
 		PriorityQueue();
-		PriorityQueue(TYPE heapType);
+		PriorityQueue(HEAP_TYPE heapType);
 		~PriorityQueue();
 
 		//Typical queue functions
