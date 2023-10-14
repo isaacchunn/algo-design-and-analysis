@@ -1,5 +1,4 @@
 #include "../Application.h"
-
 #ifdef DIJKSTRA
 #include <stdio.h>
 #include <iostream>
