@@ -40,6 +40,7 @@ public:
     bool operator<=(const Node& other) const;
 
     //Overloaded ostream
-    friend std::ostream& operator<<(std::ostream& os, const Node* date);
+    friend std::ostream& operator<<(std::ostream& os, const Node* other);
+    friend std::ostream& operator<<(std::ostream& os, const Node& other);
 };
 #endif /* NODE_H */

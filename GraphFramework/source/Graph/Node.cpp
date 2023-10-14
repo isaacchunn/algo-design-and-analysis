@@ -4,6 +4,8 @@
 //
 //  Created by Isaac on 3/10/23.
 //
+#include <iostream>
+using namespace std;
 
 #include "Node.h"
 
@@ -80,5 +82,15 @@ std::ostream& operator<<(std::ostream& os, const Node* other)
         os << "MAX";
     else
         os << other->dist;
+    return os;
+}
+
+std::ostream& operator<<(std::ostream& os, const Node& other)
+{
+    os << other.vertex << ":";
+    if (other.dist == INT_MAX)
+        os << "MAX";
+    else
+        os << other.dist;
     return os;
 }
