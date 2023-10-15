@@ -40,27 +40,27 @@ int main()
 		case 1:
 		{
 			//Set the number of vertices to be 5
-			graph->SetNoOfVertices(5);
-			//Tutorial graph for it's adjacency matrix
-			graph->adjMatrix = { { 0,4,2,6,8 },
-								 { M,0,M,4,3 },
-								 { M,M,0,1,M },
-								 { M,1,M,0,3 },
-								 { M,M,M,M,0 } };
-
-			//Make many nodes for now to test (not the best implementation, just testing it out)
-			Node* s = new Node(0, 0, "1");
-			Node* u = new Node(1, 0, "2");
-			Node* x = new Node(2, 0, "3");
-			Node* v = new Node(3, 0, "4");
-			Node* y = new Node(4, 0, "5");
+			graph->SetNoOfVertices(7);
+			graph->AddBidirectionalEdge(1, 2, 2);
+			graph->AddBidirectionalEdge(1, 6, 7);
+			graph->AddBidirectionalEdge(1, 7, 3);
+			graph->AddBidirectionalEdge(2, 7, 6);
+			graph->AddBidirectionalEdge(2, 3, 4);
+			graph->AddBidirectionalEdge(3, 5, 2);
+			graph->AddBidirectionalEdge(4, 5, 2);
+			graph->AddBidirectionalEdge(4, 6, 5);
+			graph->AddBidirectionalEdge(4, 7, 1);
+			graph->AddBidirectionalEdge(5, 7, 3);
 
 			//Add into our graph the above nodes, storing the vertex as keys (assumes no vertex are repeated)
-			graph->nodes[s->GetVertex()] = s;
-			graph->nodes[u->GetVertex()] = u;
-			graph->nodes[x->GetVertex()] = x;
-			graph->nodes[v->GetVertex()] = v;
-			graph->nodes[y->GetVertex()] = y;
+			//Populate our nodes
+			for (int i = 0; i < graph->V; i++)
+			{
+				string nodeName = "";
+				nodeName += char(65 + i);
+				Node* n = new Node(i, INT_MAX, nodeName);
+				graph->nodes[i] = n;
+			}
 
 			//Update adjacency list
 			graph->UpdateAdjacencyList();
