@@ -17,5 +17,7 @@ class WQUPC : public UnionFind
 		void UnionV(int v1, int v2);
 		int Find(int v1);
 		bool Connected(int v1, int v2);
+    
+        void PrintSize();
 };
 #endif

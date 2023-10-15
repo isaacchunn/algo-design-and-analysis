@@ -168,18 +168,10 @@ int main()
 			cout << "Enter Mode: 1) QuickFind, 2) QuickUnion, 3) WQUPC: ";
 			int mode;
 			cin >> mode;
-			long sumTime = 0;
-			for (int i = 0; i < 50; i++)
-			{			
-				//Update our MST graph bnased on current graph
-				mst->SetupMST(graph);
-				//Build our MST
-				Kruskal::BuildMST(graph, mst, 0, (UNION_TYPE)(mode - 1));
-				sumTime += Timer::GetDuration().count();
-				//std::cout << "Time taken: " << Timer::GetDuration().count() << " microseconds" << std::endl;
-			}
-			std::cout << "Average Time taken: " << sumTime / 50 << " microseconds" << std::endl;
-
+            //Update our MST graph bnased on current graph
+            mst->SetupMST(graph);
+            //Build our MST
+            Kruskal::BuildMST(graph, mst, 0, (UNION_TYPE)(mode - 1));
 			//mst->PrintAdjMatrix();
 			//mst->PrintAdjList();
 			break;

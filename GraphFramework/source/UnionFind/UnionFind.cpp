@@ -17,3 +17,12 @@ UnionFind::~UnionFind()
 {
 	id.clear();
 }
+
+void UnionFind::PrintID()
+{
+    for(int i = 0; i < (int)id.size(); i++)
+    {
+        std::cout << id[i] + 1 << " ";
+    }
+    std::cout << std::endl;
+}

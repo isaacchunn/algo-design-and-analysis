@@ -2,6 +2,7 @@
 #define UNION_FIND_H
 
 #include <vector>
+#include <iostream>
 
 enum UNION_TYPE
 {
@@ -16,7 +17,7 @@ enum UNION_TYPE
 /// </summary>
 class UnionFind
 {
-protected:
+protected :
 	int size;
 	//We need an array of length n, lets just use vector for easy access
 	std::vector<int> id;
@@ -29,6 +30,9 @@ public:
 	virtual void UnionV(int v1, int v2) = 0; //called unionV as union is a keyword in C++ for variables that are stored in same memory space (think adj matrix or adj list)
 	virtual int Find(int v1) = 0;
 	virtual bool Connected(int v1, int v2) = 0;
+    
+    void PrintID();
+    
 };
 
 #endif

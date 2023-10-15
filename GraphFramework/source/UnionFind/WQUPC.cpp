@@ -76,6 +76,7 @@ int WQUPC::Find(int v1)
 		//id[root] = id[id[root]];
 		root = id[root];
 	}
+    /*
 	////Two pass path compression
 	while (v1 != id[v1])
 	{
@@ -86,6 +87,7 @@ int WQUPC::Find(int v1)
 		//Then let v1 be parent
 		v1 = parent;
 	}
+     */
 
 	//itr is now the root
 	return root;
@@ -101,4 +103,13 @@ bool WQUPC::Connected(int v1, int v2)
 {
 	//Do v1 and v2 have the same root?
 	return Find(v1) == Find(v2);
+}
+
+void WQUPC::PrintSize()
+{
+    for(int i = 0; i < (int)sz.size(); i++)
+    {
+        std::cout << sz[i] << " ";
+    }
+    std::cout << std::endl;
 }

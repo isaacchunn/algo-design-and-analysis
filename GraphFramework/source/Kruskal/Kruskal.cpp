@@ -22,13 +22,13 @@ void Kruskal::BuildMST(Graph* g, Graph* mst, Node* source, UNION_TYPE type)
 	switch (type)
 	{
 	case QUICKFIND:
-		uf = new QuickFind(g->edges.size());
+		uf = new QuickFind(g->V);
 		break;
 	case QUICKUNION:
-		uf = new QuickUnion(g->edges.size());
+		uf = new QuickUnion(g->V);
 		break;
 	case WQUPC_:
-		uf = new WQUPC(g->edges.size());
+		uf = new WQUPC(g->V);
 		break;
 	case TOTAL_UNION_TYPE:
 		break;
@@ -39,9 +39,10 @@ void Kruskal::BuildMST(Graph* g, Graph* mst, Node* source, UNION_TYPE type)
 	//While priority queue is not empty, and the edges have not reached V - 1 (for MST)
 	while (!pq->IsEmpty() && mst->E < mst->V -1)
 	{
+        cout << "---" << endl;
 		//Get the minimum cost edge
 		Edge * e = pq->Top();
-		//cout << "Chosen " << e << endl;
+		cout << "Chosen " << e << endl;
 		//Get both node vertexes
 		int v = e->GetSource()->GetVertex();
 		int w = e->GetTo()->GetVertex();
@@ -49,7 +50,7 @@ void Kruskal::BuildMST(Graph* g, Graph* mst, Node* source, UNION_TYPE type)
 		//If the two vertexes are not connected, then union them and add this edge into the MST
 		if (!uf->Connected(v, w))
 		{
-			//cout << "Adding " << e << endl;
+			cout << "Adding " << e << endl;
 			uf->UnionV(v, w);
 			//Add a bidirectional edge into a mst
 			mst->AddBidirectionalEdge(v, w, e->GetWeight(), false);
@@ -58,9 +59,21 @@ void Kruskal::BuildMST(Graph* g, Graph* mst, Node* source, UNION_TYPE type)
 		}	
 		else
 		{
-			//cout << "Reject " << e << endl;
+			cout << "Reject " << e << endl;
 		}
-	}	
+        
+        //Debug section
+        cout << "id: ";
+        uf->PrintID();
+        //Dynamically cast to our wqupc as that class holds the size vector
+        WQUPC * wqupc = dynamic_cast<WQUPC*>(uf);
+        if(wqupc != NULL)
+        {
+            cout << "sz: ";
+            wqupc->PrintSize();
+        }
+        cout << "---" << endl;
+	}
 	Timer::Stop();
 	//After these, we can update our mst adj list
 	mst->UpdateAdjacencyList();
