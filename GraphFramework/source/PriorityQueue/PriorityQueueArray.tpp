@@ -39,7 +39,7 @@ bool PriorityQueueArray<T>::Insert(T n)
 /// </summary>
 /// <returns>smallest node, null if queue empty</returns>
 template <class T>
-template <typename U = T>
+template <typename U>
 typename std::enable_if<!std::is_pointer<U>::value, T>::type PriorityQueueArray<T>::GetSmallest()
 {
 	//Trivial case check
@@ -70,7 +70,7 @@ typename std::enable_if<!std::is_pointer<U>::value, T>::type PriorityQueueArray<
 /// </summary>
 /// <returns>smallest node, null if queue empty</returns>
 template <class T>
-template <typename U = T>
+template <typename U>
 typename std::enable_if<std::is_pointer<U>::value, T>::type PriorityQueueArray<T>::GetSmallest()
 {
 	//Trivial case check

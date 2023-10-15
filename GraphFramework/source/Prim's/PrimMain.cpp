@@ -166,7 +166,7 @@ int main()
 			//Update our MST graph bnased on current graph
 			mst->SetupMST(graph);
 			//Build our MST
-			Prim::BuildMST(graph, mst, 6);
+			Prim::BuildMST(graph, mst, 0);
 			mst->PrintAdjMatrix();
 			mst->PrintAdjList();
 			cout << "Edges: " << mst->E << endl;

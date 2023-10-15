@@ -336,7 +336,7 @@ void Heap<T>::Heapify(int H)
 /// <param name="H">index of root</param>
 /// <param name="k">value to compare</param>
 template<class T>
-template <typename U = T>
+template <typename U>
 typename std::enable_if<!std::is_pointer<U>::value>::type Heap<T>::FixHeap(int H, T k, int maxIndex)
 {	
 	//cout << "Running heap normal version" << endl;
@@ -406,7 +406,7 @@ typename std::enable_if<!std::is_pointer<U>::value>::type Heap<T>::FixHeap(int H
 /// <param name="H">index of root</param>
 /// <param name="k">value to compare</param>
 template<class T>
-template <typename U = T>
+template <typename U>
 typename std::enable_if<std::is_pointer<U>::value>::type Heap<T>::FixHeap(int H, T k, int maxIndex)
 {
 	//cout << "Running heap pointer version" << endl;
