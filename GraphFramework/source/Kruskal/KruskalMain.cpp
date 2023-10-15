@@ -82,7 +82,6 @@ int main()
 			graph->PrintAdjMatrix();
 			graph->PrintAdjList();
 			break;
-			break;
 		}
 		case 3:
 		{
@@ -137,10 +136,13 @@ int main()
 		}
 		case 8:
 		{
+			cout << "Enter Mode: 1) QuickFind, 2) QuickUnion, 3) WQUPC: ";
+			int mode;
+			cin >> mode;
 			//Update our MST graph bnased on current graph
 			mst->SetupMST(graph);
 			//Build our MST
-			Kruskal::BuildMST(graph, mst, 0);
+			Kruskal::BuildMST(graph, mst, 0, (UNION_TYPE)(mode-1));
 			mst->PrintAdjMatrix();
 			mst->PrintAdjList();
 			break;

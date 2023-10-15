@@ -3,6 +3,14 @@
 
 #include <vector>
 
+enum UNION_TYPE
+{
+	QUICKFIND,
+	QUICKUNION,
+	WQUPC,
+	TOTAL_UNION_TYPE
+};
+
 /// <summary>
 /// Abstract class to enclose the methods and some common variables of our three find algorithms
 /// </summary>

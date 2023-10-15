@@ -4,17 +4,16 @@
 #include<vector>
 #include "../Graph/Node.h"
 #include "../PriorityQueue/PriorityQueue.h"
+#include "../PriorityQueue/PriorityQueueArray.h"
 #include "../Graph/Graph.h"
 #include "../UnionFind/QuickFind.h"
 
 class Kruskal
 {
-	private:
-		static void UpdateMST(Graph* mst);
 	public:
 		//Functions to build our MST
-		static void BuildMST(Graph* g, Graph* mst, Node* source);
-		static void BuildMST(Graph* g, Graph* mst, int sourceVertex);
+		static void BuildMST(Graph* g, Graph* mst, Node* source, UNION_TYPE type);
+		static void BuildMST(Graph* g, Graph* mst, int sourceVertex, UNION_TYPE type);
 };
 
 

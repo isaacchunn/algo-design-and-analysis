@@ -6,7 +6,7 @@
 /// <param name="g">graph</param>
 /// <param name="mst">mst</param>
 /// <param name="source">source node</param>
-void Kruskal::BuildMST(Graph* g, Graph* mst, Node* source)
+void Kruskal::BuildMST(Graph* g, Graph* mst, Node* source, UNION_TYPE type)
 {
 	//Initialize a new priority queue
 	PriorityQueue<Edge*> * pq = new PriorityQueue<Edge*>(MINIMISING);
@@ -17,7 +17,22 @@ void Kruskal::BuildMST(Graph* g, Graph* mst, Node* source)
 		pq->Insert(g->edges[i]);
 	}
 	//Create our union find based on whatever we want by upcasting
-	UnionFind* uf = new QuickFind(g->edges.size());
+	UnionFind* uf = NULL;
+	switch (type)
+	{
+	case QUICKFIND:
+		uf = new QuickFind(g->edges.size());
+		break;
+	case QUICKUNION:
+		break;
+	case WQUPC:
+		break;
+	case TOTAL_UNION_TYPE:
+		break;
+	default:
+		break;
+	}
+	
 	//While priority queue is not empty, and the edges have not reached V - 1 (for MST)
 	while (!pq->IsEmpty() && mst->E < mst->V -1)
 	{
@@ -53,7 +68,7 @@ void Kruskal::BuildMST(Graph* g, Graph* mst, Node* source)
 /// <param name="g">graph</param>
 /// <param name="mst">mst</param>
 /// <param name="sourceVertex">source vertex</param>
-void Kruskal::BuildMST(Graph* g, Graph* mst, int sourceVertex)
+void Kruskal::BuildMST(Graph* g, Graph* mst, int sourceVertex, UNION_TYPE type)
 {	
 	//No vertices
 	if (g->V == 0)
@@ -62,7 +77,7 @@ void Kruskal::BuildMST(Graph* g, Graph* mst, int sourceVertex)
 	try
 	{
 		Node* n = g->nodes[sourceVertex];
-		BuildMST(g, mst, n);
+		BuildMST(g, mst, n, type);
 	}
 	catch (std::exception e)
 	{
