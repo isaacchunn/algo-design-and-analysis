@@ -48,6 +48,30 @@ void Prim::BuildMST(Graph* g, Graph* mst, Node* source)
 		S[u->GetVertex()] = 1;
 		//Update fringe
 		UpdateFringe(g, pq, u);
+		cout << "S: ";
+		for (int v = 0; v < g->V; v++)
+		{
+			cout << S[v] << " ";
+		}
+		cout << endl;
+		cout << "d: ";
+		for (int v = 0; v < g->V; v++)
+		{
+			if (g->nodes[v]->GetDistanceFromSource() == INT_MAX)
+				cout << char(236) << " ";
+			else
+				cout << g->nodes[v]->GetDistanceFromSource() << " ";
+		}
+		cout << endl;
+		cout << "pi: ";
+		for (int v = 0; v < g->V; v++)
+		{
+			if (pi[v] == NULL)
+				cout << "N ";
+			else
+				cout << pi[v]->GetName() << " ";
+		}
+		cout << endl;
 	}
 	//After all this, update MST
 	UpdateMST(mst);
