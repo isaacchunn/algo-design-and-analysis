@@ -125,7 +125,7 @@ void Dijkstra::CalculateShortestPathArray(Graph* g, Node* source)
 	Timer::Start();
 	//Initialize new priority queue
 	//Priority queue in terms of int distances, we will utilise the map
-	PriorityQueueArray pq = PriorityQueueArray(HEAP_TYPE::MINIMISING);
+	PriorityQueueArray<Node*> pq = PriorityQueueArray<Node*>(HEAP_TYPE::MINIMISING);
 
 	//For each vertice in graph (assumed to be in ascending order)
 	for (int v = 0; v < g->V; v++)
