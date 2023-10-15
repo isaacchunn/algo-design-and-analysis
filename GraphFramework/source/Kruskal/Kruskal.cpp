@@ -24,8 +24,10 @@ void Kruskal::BuildMST(Graph* g, Graph* mst, Node* source, UNION_TYPE type)
 		uf = new QuickFind(g->edges.size());
 		break;
 	case QUICKUNION:
+		uf = new QuickUnion(g->edges.size());
 		break;
-	case WQUPC:
+	case WQUPC_:
+		uf = new WQUPC(g->edges.size());
 		break;
 	case TOTAL_UNION_TYPE:
 		break;

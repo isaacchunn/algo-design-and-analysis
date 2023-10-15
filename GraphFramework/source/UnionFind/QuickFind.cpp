@@ -3,6 +3,7 @@
 QuickFind::QuickFind()
 	: UnionFind()
 {
+
 }
 
 QuickFind::QuickFind(int N)

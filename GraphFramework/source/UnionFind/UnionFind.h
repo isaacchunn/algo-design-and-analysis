@@ -1,4 +1,4 @@
-#ifndef UNIONFIND_H
+#ifndef UNION_FIND_H
 #define UNION_FIND_H
 
 #include <vector>
@@ -7,7 +7,7 @@ enum UNION_TYPE
 {
 	QUICKFIND,
 	QUICKUNION,
-	WQUPC,
+	WQUPC_,
 	TOTAL_UNION_TYPE
 };
 

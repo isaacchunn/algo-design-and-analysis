@@ -7,6 +7,8 @@
 #include "../PriorityQueue/PriorityQueueArray.h"
 #include "../Graph/Graph.h"
 #include "../UnionFind/QuickFind.h"
+#include "../UnionFind/QuickUnion.h"
+#include "../UnionFind/WQUPC.h"
 
 class Kruskal
 {

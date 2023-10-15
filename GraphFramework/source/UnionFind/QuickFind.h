@@ -4,7 +4,7 @@
 #include "UnionFind.h"
 
 /// <summary>
-/// Implementation of the quickfind algorithm that inehrits from UnionFind~
+/// Implementation of the quickfind algorithm that inherits from UnionFind~
 /// </summary>
 class QuickFind : public UnionFind
 {
@@ -19,5 +19,4 @@ public:
 	bool Connected(int v1, int v2);
 
 };
-
 #endif
