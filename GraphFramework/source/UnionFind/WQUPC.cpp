@@ -68,11 +68,27 @@ int WQUPC::Find(int v1)
 {
 	//Have to while loop up to find the root of v1
 	//The root of a node is itself, so we are just checking if parent and current vertex is same.
+	int root = v1;
+	
+	while (root != id[root])
+	{
+		//One pass path compression
+		//id[root] = id[id[root]];
+		root = id[root];
+	}
+	////Two pass path compression
 	while (v1 != id[v1])
 	{
-		v1 = id[v1];
+		//Save the parent to current parent
+		int parent = id[v1];
+		//Set the current parent of v1 straight to root
+		id[v1] = root;
+		//Then let v1 be parent
+		v1 = parent;
 	}
-	return v1;
+
+	//itr is now the root
+	return root;
 }
 
 /// <summary>

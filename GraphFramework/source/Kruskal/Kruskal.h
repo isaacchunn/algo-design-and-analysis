@@ -9,6 +9,7 @@
 #include "../UnionFind/QuickFind.h"
 #include "../UnionFind/QuickUnion.h"
 #include "../UnionFind/WQUPC.h"
+#include "../Misc/Timer.h"
 
 class Kruskal
 {

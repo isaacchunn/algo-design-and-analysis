@@ -8,6 +8,7 @@
 /// <param name="source">source node</param>
 void Kruskal::BuildMST(Graph* g, Graph* mst, Node* source, UNION_TYPE type)
 {
+	Timer::Start();
 	//Initialize a new priority queue
 	PriorityQueue<Edge*> * pq = new PriorityQueue<Edge*>(MINIMISING);
 	//Insert all the edges of the graph into the priority queue
@@ -59,7 +60,8 @@ void Kruskal::BuildMST(Graph* g, Graph* mst, Node* source, UNION_TYPE type)
 		{
 			//cout << "Reject " << e << endl;
 		}
-	}
+	}	
+	Timer::Stop();
 	//After these, we can update our mst adj list
 	mst->UpdateAdjacencyList();
 }
