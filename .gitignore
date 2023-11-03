@@ -101,3 +101,4 @@ dkms.conf
 *.enc
 *.log
 *.ipch
+*.suo
